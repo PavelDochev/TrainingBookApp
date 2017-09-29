@@ -18,10 +18,12 @@
     "@angular/platform-server": "^4.4.4",
     "@angular/router": "^4.4.4",
     "@ngtools/webpack": "1.7.2",
+    "@types/auth0-js": "^8.6.3",
     "@types/webpack-env": "1.13.1",
     "angular2-template-loader": "0.6.2",
     "aspnet-prerendering": "^3.0.1",
     "aspnet-webpack": "^2.0.1",
+    "auth0-js": "^8.10.1",
     "awesome-typescript-loader": "3.2.3",
     "bootstrap": "latest",
     "css": "latest",
@@ -49,6 +51,7 @@
     "zone.js": "latest"
   },
   "devDependencies": {
+    "@angular/cli": "^1.4.4",
     "@types/chai": "4.0.4",
     "@types/jasmine": "2.6.0",
     "chai": "4.1.2",
