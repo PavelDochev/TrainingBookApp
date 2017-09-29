@@ -5,12 +5,11 @@ import { AUTH_CONFIG } from './auth.config';
 import * as auth0 from 'auth0-js';
 
 // Avoid name not found warnings
- declare var _auth0:any;
 
 @Injectable()
 export class AuthService {
   // Create Auth0 web auth instance
-  private _auth0 = new auth0.WebAuth({
+  public _auth0 = new auth0.WebAuth({
     clientID: 'gHAXMUxSR5t0r6MpQAOHlylnoPM2mQrr',
     domain: 'training-book.eu.auth0.com',
     responseType: 'token id_token',
@@ -43,67 +42,112 @@ export class AuthService {
     this.loggedIn = value;
   }
 
-  login() {
+  public login() {
     // Auth0 authorize request
-    _auth0.authorize();
-  }
-
-  handleAuth() {
-    // When Auth0 hash parsed, get profile
+    this._auth0.authorize({
+    audience: 'https://training-book.eu.auth0.com/userinfo',
+    scope: 'read:order write:order',
+    responseType: 'token id_token',
+    redirectUri: 'http://localhost:5000/callback'
+  });
+}
+ public handleAuthentication(): void {
     this._auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
-        this._getProfile(authResult);
+        this.setSession(authResult);
+        this.router.navigate(['/home']);
       } else if (err) {
-        console.error(`Error authenticating: ${err.error}`);
-      }
-      this.router.navigate(['/']);
-    });
-  }
-
-  private _getProfile(authResult:any) {
-    // Use access token to retrieve user's profile and set session
-    this._auth0.client.userInfo(authResult.accessToken, (err, profile) => {
-      if (profile) {
-        this._setSession(authResult, profile);
-      } else if (err) {
-        console.error(`Error authenticating: ${err.error}`);
+        this.router.navigate(['/home']);
+        console.log(err);
       }
     });
   }
 
-  private _setSession(authResult:any, profile:any) {
-    // Save session data and update login status subject
-    const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + Date.now());
-    // Set tokens and expiration in localStorage and props
+  private setSession(authResult:any): void {
+    // Set the time that the access token will expire at
+    const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
-    localStorage.setItem('profile', JSON.stringify(profile));
-    this.userProfile = profile;
-    // Update login status in loggedIn$ stream
-    this.setLoggedIn(true);
   }
 
-  logout() {
-    // Ensure all auth items removed from localStorage
+  public logout(): void {
+    // Remove tokens and expiry time from localStorage
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
-    localStorage.removeItem('profile');
     localStorage.removeItem('expires_at');
-    localStorage.removeItem('authRedirect');
-    // Reset local properties, update loggedIn$ stream
-    this.userProfile = undefined;
-    this.setLoggedIn(false);
-    // Return to homepage
+    // Go back to the home route
     this.router.navigate(['/']);
   }
 
-    tokenValid(): boolean {
+  public isAuthenticated(): boolean {
+    // Check whether the current time is past the
+    // access token's expiry time
+    let expire = localStorage.getItem('expires_at')||"";
+    const expiresAt = JSON.parse(expire);
+    return new Date().getTime() < expiresAt;
+  }
+  tokenValid(): boolean {
     // Check if current time is past access token's expiration
     let expires=localStorage.getItem('expires at')||"";
     const expiresAt = JSON.parse(expires);
     return Date.now() < expiresAt;
   }
 
+
 }
+
+//   handleAuth() {
+//     // When Auth0 hash parsed, get profile
+//     this._auth0.parseHash((err, authResult) => {
+//       if (authResult && authResult.accessToken && authResult.idToken) {
+//         window.location.hash = '';
+//         this._getProfile(authResult);
+//       } else if (err) {
+//         console.error(`Error authenticating: ${err.error}`);
+//       }
+//       this.router.navigate(['/']);
+//     });
+//   }
+
+//   private _getProfile(authResult:any) {
+//     // Use access token to retrieve user's profile and set session
+//     this._auth0.client.userInfo(authResult.accessToken, (err, profile) => {
+//       if (profile) {
+//         this._setSession(authResult, profile);
+//       } else if (err) {
+//         console.error(`Error authenticating: ${err.error}`);
+//       }
+//     });
+//   }
+
+//   private _setSession(authResult:any, profile:any) {
+//     // Save session data and update login status subject
+//     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + Date.now());
+//     // Set tokens and expiration in localStorage and props
+//     localStorage.setItem('access_token', authResult.accessToken);
+//     localStorage.setItem('id_token', authResult.idToken);
+//     localStorage.setItem('expires_at', expiresAt);
+//     localStorage.setItem('profile', JSON.stringify(profile));
+//     this.userProfile = profile;
+//     // Update login status in loggedIn$ stream
+//     this.setLoggedIn(true);
+//   }
+
+//   logout() {
+//     // Ensure all auth items removed from localStorage
+//     localStorage.removeItem('access_token');
+//     localStorage.removeItem('id_token');
+//     localStorage.removeItem('profile');
+//     localStorage.removeItem('expires_at');
+//     localStorage.removeItem('authRedirect');
+//     // Reset local properties, update loggedIn$ stream
+//     this.userProfile = undefined;
+//     this.setLoggedIn(false);
+//     // Return to homepage
+//     this.router.navigate(['/']);
+//   }
+
+    
+// }

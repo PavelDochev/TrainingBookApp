@@ -9,6 +9,6 @@ import { AuthService } from "../../auth/auth.service";
 export class AppComponent {
     constructor(private auth: AuthService) {
     // Check for authentication and handle if hash present
-    this.auth.handleAuth();
+    this.auth.handleAuthentication();
   }
 }
