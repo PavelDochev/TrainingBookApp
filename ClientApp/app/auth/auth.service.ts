@@ -28,12 +28,17 @@ export class AuthService {
     // If not authenticated but there are still items
     // in localStorage, log out.
     const lsProfile = localStorage.getItem('profile');
-    if (this.tokenValid) {
-      this.userProfile = JSON.parse(JSON.stringify(lsProfile));
-      this.setLoggedIn(true);
-    } else if (!this.tokenValid && lsProfile) {
-      this.logout();
+    if(lsProfile!=null)
+    {
+      if (this.tokenValid) {
+        this.userProfile = JSON.parse(JSON.stringify(lsProfile));
+        this.setLoggedIn(true);
+      } 
+      else if (!this.tokenValid && lsProfile) {
+        this.logout();
+      }
     }
+    
   }
 
   setLoggedIn(value: boolean) {
@@ -85,6 +90,7 @@ export class AuthService {
     // Check whether the current time is past the
     // access token's expiry time
     let expire = localStorage.getItem('expires_at')||"";
+    if(!expire) return false;
     const expiresAt = JSON.parse(expire);
     return new Date().getTime() < expiresAt;
   }
