@@ -1,7 +1,7 @@
-<div class='container-fluid'>
-    <div class='row'>
+<div class='container-fluid' >
+    <div class='row' >
         <div class='col-sm-3'>
-            <nav-menu></nav-menu>
+            <nav-menu ></nav-menu>
         </div>
         <div class='col-sm-9 body-content'>
             <router-outlet></router-outlet>
@@ -12,10 +12,5 @@
     <!--<button class="btn btn-primary btn-margin" routerLink="/">
         Home
     </button>-->
-    <button class="btn btn-primary btn-margin" *ngIf="!auth.isAuthenticated()" (click)="auth.login()">
-        Log In
-    </button>
-    <button class="btn btn-primary btn-margin" *ngIf="auth.isAuthenticated()" (click)="auth.logout()">
-        Log Out
-    </button>
+    
 </div>

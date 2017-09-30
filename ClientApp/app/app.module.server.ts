@@ -9,9 +9,6 @@ import { AuthService } from "./auth/auth.service";
     imports: [
         ServerModule,
         AppModuleShared
-    ],
-    providers:[
-        AuthService
     ]
 })
 export class AppModule {

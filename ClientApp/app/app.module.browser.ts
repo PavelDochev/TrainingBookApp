@@ -12,7 +12,6 @@ import { AuthService } from "./auth/auth.service";
     ],
     providers: [
         { provide: 'BASE_URL', useFactory: getBaseUrl },
-        AuthService
     ]
 })
 export class AppModule {

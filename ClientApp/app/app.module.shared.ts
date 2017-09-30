@@ -28,11 +28,12 @@ import { AuthService } from "./auth/auth.service";
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
-            { path: 'callback', component: CounterComponent },
+            { path: 'callback', component: HomeComponent},
             { path: '**', redirectTo: 'home' }
         ])
     ],
     providers:[AuthService]
+    
 })
 export class AppModuleShared {
 }
