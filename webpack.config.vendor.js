@@ -12,12 +12,17 @@ const treeShakableModules = [
     '@angular/platform-browser',
     '@angular/platform-browser-dynamic',
     '@angular/router',
+    '@angular/material',
+    '@angular/cdk',
     'zone.js',
 ];
 const nonTreeShakableModules = [
     'bootstrap',
     'bootstrap/dist/css/bootstrap.css',
     'es6-promise',
+    '@angular/material',
+    '@angular/material/prebuilt-themes/indigo-pink.css',
+    '@angular/cdk',
     'es6-shim',
     'event-source-polyfill',
     'jquery',
