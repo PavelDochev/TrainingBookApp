@@ -11,7 +11,7 @@
             <button md-button routerLink="/home">Home</button>
             <button md-button routerLink="/counter">Counter</button>
             <button md-button routerLink="/fetch-data">Fetch data</button>
-            <button md-button (click)="auth.logout()">Log out</button>
+            <button md-button (click)="auth.logout()">Log out||translate</button>
         </div>
         <div *ngIf="!auth.isAuthenticated()">
             <button md-button (click)="auth.login()">Log in</button>

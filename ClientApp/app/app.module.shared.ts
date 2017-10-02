@@ -12,9 +12,8 @@ import { AuthService } from "./auth/auth.service";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MaterialModule,MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule } from '@angular/material';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
+import { FlexLayoutModule } from "@angular/flex-layout";
 @NgModule({
     declarations: [
         AppComponent,
@@ -34,7 +33,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
         MdIconModule,
         MaterialModule,
         HttpClientModule,
-        TranslateModule,
+        FlexLayoutModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
@@ -45,7 +44,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
         ])
     ],
     providers:[AuthService],
-    exports:[TranslateModule]
     
 })
 export class AppModuleShared {
