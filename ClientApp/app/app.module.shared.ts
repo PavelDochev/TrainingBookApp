@@ -10,6 +10,8 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { AuthService } from "./auth/auth.service";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MaterialModule,MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule } from '@angular/material';
 
 @NgModule({
     declarations: [
@@ -17,12 +19,20 @@ import { AuthService } from "./auth/auth.service";
         NavMenuComponent,
         CounterComponent,
         FetchDataComponent,
-        HomeComponent
+        HomeComponent,
+        
     ],
     imports: [
         CommonModule,
         HttpModule,
         FormsModule,
+        BrowserAnimationsModule,
+        MdButtonModule,
+        MdMenuModule,
+        MdCardModule,
+        MdToolbarModule,
+        MdIconModule,
+        MaterialModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },

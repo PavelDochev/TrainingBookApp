@@ -1,16 +1,16 @@
-<div class='container-fluid' >
-    <div class='row' >
-        <div class='col-sm-3'>
-            <nav-menu ></nav-menu>
-        </div>
-        <div class='col-sm-9 body-content'>
-            <router-outlet></router-outlet>
-        </div>
-    </div>
-</div>
-<div> 
-    <!--<button class="btn btn-primary btn-margin" routerLink="/">
-        Home
-    </button>-->
+<md-toolbar color="primary">
+
+    <span>MyCompany</span>
+    <span class="example-spacer"></span>
+    <button md-button [mdMenuTriggerFor]="appMenu"><md-icon>menu</md-icon> Menu</button>
     
+</md-toolbar>
+
+<md-menu #appMenu="mdMenu">
+    <button md-menu-item>Settings</button>
+    <button md-menu-item>Help</button>
+</md-menu>
+
+<div class='col-sm-9 body-content'>
+    <router-outlet></router-outlet>
 </div>
