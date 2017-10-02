@@ -1,16 +1,48 @@
 <md-toolbar color="primary">
 
-    <span>MyCompany</span>
-    <span class="example-spacer"></span>
-    <button md-button [mdMenuTriggerFor]="appMenu"><md-icon>menu</md-icon> Menu</button>
-    
+    <button md-button routerLink="/">
+    <md-icon>home</md-icon> 
+        {{title}}</button>
+
+    <!-- This fills the remaining space of the current row -->
+    <span class="fill-remaining-space"></span>
+    <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+        <div *ngIf="auth.isAuthenticated()">
+            <button md-button routerLink="/home">Home</button>
+            <button md-button routerLink="/counter">Counter</button>
+            <button md-button routerLink="/fetch-data">Fetch data</button>
+            <button md-button (click)="auth.logout()">Log out</button>
+        </div>
+        <div *ngIf="!auth.isAuthenticated()">
+            <button md-button (click)="auth.login()">Log in</button>
+        </div>
+        <div class="language-btn">
+            <button (click)="switchLanguage('en')">en</button>
+
+            <button (click)="switchLanguage('bg')">bg</button>
+        </div>
+    </div>
+    <button md-button [md-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+     <md-icon>menu</md-icon>
+    </button>
+
 </md-toolbar>
+<md-menu x-position="before" #menu="mdMenu">
+    <div *ngIf="auth.isAuthenticated()">
+        <button md-button routerLink="/home">Home</button>
+        <button md-button routerLink="/counter">Counter</button>
+        <button md-button routerLink="/fetch-data">Fetch data</button>
+        <button md-button (click)="auth.logout()">Log out</button>
+    </div>
+    <div *ngIf="!auth.isAuthenticated()">
+        <button md-button (click)="auth.login()">Log in</button>
+    </div>
+    <div class="language-btn">
+        <button (click)="switchLanguage('en')">en</button>
 
-<md-menu #appMenu="mdMenu">
-    <button md-menu-item>Settings</button>
-    <button md-menu-item>Help</button>
+        <button (click)="switchLanguage('bg')">bg</button>
+    </div>
 </md-menu>
-
 <div class='col-sm-9 body-content'>
     <router-outlet></router-outlet>
 </div>

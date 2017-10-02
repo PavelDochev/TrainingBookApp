@@ -1,11 +1,15 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@media (max-width: 767px) {
-    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
-    .body-content {
-        padding-top: 50px;
-    }
+
+/*md-toolbar{
+    position: fixed;
+    margin: 0;
+}*/
+body{
+    width: 100%;
+    height: 100%;
 }
-button{
-    display:block;
-    margin-left: 500px;
+.fill-remaining-space {
+   /*This fills the remaining space, by using flexbox.  
+  Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
 }
