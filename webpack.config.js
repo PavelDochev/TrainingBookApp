@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const AotPlugin = require('@ngtools/webpack').AotPlugin;
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
-
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = (env) => {
     // Configuration in common to both client-side and server-side bundles
     const isDevBuild = !(env && env.prod);
@@ -23,7 +23,11 @@ module.exports = (env) => {
                 { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
             ]
         },
-        plugins: [new CheckerPlugin()]
+        plugins: [new CheckerPlugin(),
+        new CopyWebpackPlugin([
+                { from: 'ClientApp/app/assets', to: 'assets' },{debug: true}
+            ])
+        ]
     };
 
     // Configuration for client-side bundle suitable for running in browsers
@@ -41,7 +45,12 @@ module.exports = (env) => {
             new webpack.SourceMapDevToolPlugin({
                 filename: '[file].map', // Remove this line if you prefer inline source maps
                 moduleFilenameTemplate: path.relative(clientBundleOutputDir, '[resourcePath]') // Point sourcemap entries to the original file locations on disk
-            })
+            }),
+            
+            new CopyWebpackPlugin([
+                { from: 'ClientApp/app/assets', to: 'assets' },
+                {debug: true}
+            ])
         ] : [
             // Plugins that apply in production builds only
             new webpack.optimize.UglifyJsPlugin(),
@@ -49,7 +58,12 @@ module.exports = (env) => {
                 tsConfigPath: './tsconfig.json',
                 entryModule: path.join(__dirname, 'ClientApp/app/app.module.browser#AppModule'),
                 exclude: ['./**/*.server.ts']
-            })
+            }),
+            
+            new CopyWebpackPlugin([
+                { from: 'ClientApp/app/assets', to: 'assets' },
+                {debug: true}
+            ])
         ])
     });
 
