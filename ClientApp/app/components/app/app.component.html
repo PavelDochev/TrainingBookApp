@@ -11,20 +11,21 @@
             <button md-button routerLink="/home">Home</button>
             <button md-button routerLink="/counter">Counter</button>
             <button md-button routerLink="/fetch-data">Fetch data</button>
-            <button md-button (click)="auth.logout()">Log out||translate</button>
+            <button md-button (click)="auth.logout()">{{toolbar.log-out|translate}}</button>
         </div>
         <div *ngIf="!auth.isAuthenticated()">
-            <button md-button (click)="auth.login()">Log in</button>
+            <button md-button (click)="auth.login()" >{{'toolbar.log-in' | translate}}</button>
         </div>
-        <div class="language-btn">
-            <button (click)="switchLanguage('en')">en</button>
+    </div>
+    <div class="language-btn">
+        <button (click)="switchLanguage('en')">en</button>
 
-            <button (click)="switchLanguage('bg')">bg</button>
-        </div>
+        <button (click)="switchLanguage('bg')">bg</button>
     </div>
     <button md-button [md-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
      <md-icon>menu</md-icon>
     </button>
+    
 
 </md-toolbar>
 <md-menu x-position="before" #menu="mdMenu">
@@ -36,11 +37,6 @@
     </div>
     <div *ngIf="!auth.isAuthenticated()">
         <button md-button (click)="auth.login()">Log in</button>
-    </div>
-    <div class="language-btn">
-        <button (click)="switchLanguage('en')">en</button>
-
-        <button (click)="switchLanguage('bg')">bg</button>
     </div>
 </md-menu>
 <div class='col-sm-9 body-content'>

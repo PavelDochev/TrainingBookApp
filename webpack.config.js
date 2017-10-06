@@ -20,12 +20,18 @@ module.exports = (env) => {
                 { test: /\.ts$/, include: /ClientApp/, use: isDevBuild ? ['awesome-typescript-loader?silent=true', 'angular2-template-loader'] : '@ngtools/webpack' },
                 { test: /\.html$/, use: 'html-loader?minimize=false' },
                 { test: /\.css$/, use: [ 'to-string-loader', isDevBuild ? 'css-loader' : 'css-loader?minimize' ] },
-                { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
+                { test: /\.(jpe?g|png|jpg|jpeg|gif|svg)$/, use: 'file-loader?name=assets/[name].[ext]' },
+                { test: /\.(csv|tsv)$/, use: ['csv-loader'] },
+                { test: /\.xml$/,use: ['xml-loader']}
+                
+            ],
+            loaders: [
+            { test: /\.json$/, loader: "json-loader" }
             ]
         },
         plugins: [new CheckerPlugin(),
         new CopyWebpackPlugin([
-                { from: 'ClientApp/app/assets', to: 'assets' },{debug: true}
+                { from: 'ClientApp/app/assets',to:'assets'  }
             ])
         ]
     };
@@ -41,16 +47,17 @@ module.exports = (env) => {
                 manifest: require('./wwwroot/dist/vendor-manifest.json')
             })
         ].concat(isDevBuild ? [
+             
+            new CopyWebpackPlugin([
+                { from: 'ClientApp/app/assets',to:'assets'  }
+            ]),
             // Plugins that apply in development builds only
             new webpack.SourceMapDevToolPlugin({
                 filename: '[file].map', // Remove this line if you prefer inline source maps
                 moduleFilenameTemplate: path.relative(clientBundleOutputDir, '[resourcePath]') // Point sourcemap entries to the original file locations on disk
-            }),
-            
-            new CopyWebpackPlugin([
-                { from: 'ClientApp/app/assets', to: 'assets' },
-                {debug: true}
-            ])
+            })
+           
+        
         ] : [
             // Plugins that apply in production builds only
             new webpack.optimize.UglifyJsPlugin(),
@@ -61,9 +68,9 @@ module.exports = (env) => {
             }),
             
             new CopyWebpackPlugin([
-                { from: 'ClientApp/app/assets', to: 'assets' },
-                {debug: true}
+                { from: 'ClientApp/app/assets',to:'assets' }
             ])
+        
         ])
     });
 
@@ -84,7 +91,12 @@ module.exports = (env) => {
                 tsConfigPath: './tsconfig.json',
                 entryModule: path.join(__dirname, 'ClientApp/app/app.module.server#AppModule'),
                 exclude: ['./**/*.browser.ts']
-            })
+            }),
+            new CopyWebpackPlugin([
+                { from: 'ClientApp/app/assets',to:'assets',
+                    output:{path: path.join(__dirname, clientBundleOutputDir)}
+                }
+            ])
         ]),
         output: {
             libraryTarget: 'commonjs',

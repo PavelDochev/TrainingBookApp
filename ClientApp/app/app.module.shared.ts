@@ -14,6 +14,8 @@ import { MaterialModule,MdButtonModule, MdCardModule, MdMenuModule, MdToolbarMod
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { HttpLoaderFactory } from "./app.module.browser";
 @NgModule({
     declarations: [
         AppComponent,
@@ -34,6 +36,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
         MaterialModule,
         HttpClientModule,
         FlexLayoutModule,
+        TranslateModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
@@ -44,10 +47,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
         ])
     ],
     providers:[AuthService],
+    exports:[TranslateModule]
     
 })
 export class AppModuleShared {
-}
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
 }

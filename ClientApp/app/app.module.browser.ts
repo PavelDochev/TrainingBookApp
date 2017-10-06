@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppModuleShared, HttpLoaderFactory } from './app.module.shared';
+import { AppModuleShared  } from './app.module.shared';
 import { AppComponent } from './components/app/app.component';
 import { AuthService } from "./auth/auth.service";
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
+export function HttpLoaderFactory(http: HttpClient) {
+}
 @NgModule({
     bootstrap: [ AppComponent ],
     imports: [
@@ -13,11 +15,11 @@ import { HttpClient } from '@angular/common/http';
         AppModuleShared,
         TranslateModule.forRoot({
             loader: {
-              provide: TranslateLoader,
-              useFactory: HttpLoaderFactory,
-              deps: [HttpClient]
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
             }
-          })
+        })
     ],
     providers: [
         { provide: 'BASE_URL', useFactory: getBaseUrl },
