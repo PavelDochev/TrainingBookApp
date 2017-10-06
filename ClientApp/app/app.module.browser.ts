@@ -3,10 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppModuleShared  } from './app.module.shared';
 import { AppComponent } from './components/app/app.component';
 import { AuthService } from "./auth/auth.service";
+import { TranslateModule, TranslateLoader  } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
 export function HttpLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http, './dist/assets/i18n/', '.json');
 }
 @NgModule({
     bootstrap: [ AppComponent ],
