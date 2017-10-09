@@ -15,13 +15,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     imports: [
         BrowserModule,
         AppModuleShared,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
-            }
-        })
     ],
     providers: [
         { provide: 'BASE_URL', useFactory: getBaseUrl },

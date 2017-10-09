@@ -2,8 +2,6 @@
     "toolbar": {
         "log-in": "Вход",
         "log-out": "Изход",
-        
-        // "bulgarian-format-date": "dd.MM.yyyy",
         "btn-yes": "Да",
         "btn-cancel": "Не"        
     }

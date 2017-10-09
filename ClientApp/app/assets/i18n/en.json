@@ -1,0 +1,9 @@
+{
+    "toolbar": {
+        "log-in": "Log in",
+        "log-out": "Log out",
+        
+        "btn-yes": "Yes",
+        "btn-cancel": "No"        
+    }
+}

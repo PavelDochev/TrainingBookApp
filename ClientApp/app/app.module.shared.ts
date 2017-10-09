@@ -36,7 +36,13 @@ import { HttpLoaderFactory } from "./app.module.browser";
         MaterialModule,
         HttpClientModule,
         FlexLayoutModule,
-        TranslateModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
