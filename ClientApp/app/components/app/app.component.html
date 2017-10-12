@@ -8,9 +8,9 @@
     <span class="fill-remaining-space"></span>
     <div fxLayout="row" fxShow="false" fxShow.gt-sm>
         <div *ngIf="auth.isAuthenticated()">
-            <button md-button routerLink="/home">Home</button>
-            <button md-button routerLink="/counter">Counter</button>
-            <button md-button routerLink="/fetch-data">Fetch data</button>
+            <button md-button routerLink="/home">{{'toolbar.btn-home' | translate}}</button>
+            <button md-button routerLink="/counter">{{'toolbar.btn-rating' | translate}}</button>
+            <button md-button routerLink="/fetch-data">{{'toolbar.btn-users' | translate}}</button>
             <button md-button (click)="auth.logout()">{{'toolbar.log-out' | translate}}</button>
         </div>
         <div *ngIf="!auth.isAuthenticated()">
@@ -18,9 +18,10 @@
         </div>
     </div>
     <div class="language-btn">
-        <button (click)="switchLanguage('en')">en</button>
-
-        <button (click)="switchLanguage('bg')">bg</button>
+        <a (click)="switchLanguage('en')"> <img class="en-lang-btn"/></a>
+        <!--<button class="en-lang-btn" ></button>-->
+        <a (click)="switchLanguage('bg')"> <img class="bg-lang-btn"/></a>
+        <!--<button class="bg-lang-btn" ></button>-->
     </div>
     <button md-button [md-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
      <md-icon>menu</md-icon>
@@ -30,15 +31,16 @@
 </md-toolbar>
 <md-menu x-position="before" #menu="mdMenu">
     <div *ngIf="auth.isAuthenticated()">
-        <button md-button routerLink="/home">Home</button>
-        <button md-button routerLink="/counter">Counter</button>
-        <button md-button routerLink="/fetch-data">Fetch data</button>
-        <button md-button (click)="auth.logout()">Log out</button>
+        <button class="menuBtn" fxLayoutAlign="center" md-button routerLink="/home">{{'toolbar.btn-home' | translate}}</button>
+        <button class="menuBtn" fxLayoutAlign="center" md-button routerLink="/counter">{{'toolbar.btn-rating' | translate}}</button>
+        <button class="menuBtn" fxLayoutAlign="center" md-button routerLink="/fetch-data">{{'toolbar.btn-users' | translate}}</button>
+        <button class="menuBtn" fxLayoutAlign="center" md-button (click)="auth.logout()">{{'toolbar.log-out' | translate}}</button>
     </div>
     <div *ngIf="!auth.isAuthenticated()">
-        <button md-button (click)="auth.login()">Log in</button>
+        <button class="menuBtn" fxLayoutAlign="center" md-button (click)="auth.login()">{{'toolbar.log-in' | translate}}</button>
     </div>
 </md-menu>
+
 <div class='col-sm-9 body-content'>
     <router-outlet></router-outlet>
 </div>

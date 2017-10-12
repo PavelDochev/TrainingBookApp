@@ -2,8 +2,10 @@
     "toolbar": {
         "log-in": "Log in",
         "log-out": "Log out",
-        
         "btn-yes": "Yes",
-        "btn-cancel": "No"        
+        "btn-cancel": "No",
+        "btn-users":"Users",
+        "btn-rating":"Rating",
+        "btn-home":"Home"
     }
 }

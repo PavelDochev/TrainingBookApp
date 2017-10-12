@@ -3,6 +3,9 @@
         "log-in": "Вход",
         "log-out": "Изход",
         "btn-yes": "Да",
-        "btn-cancel": "Не"        
+        "btn-cancel": "Не",
+        "btn-users":"Потребители",
+        "btn-rating":"Класация",
+        "btn-home":"Начало"
     }
 }
