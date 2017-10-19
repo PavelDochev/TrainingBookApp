@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 //using WebApi.Services;
 //using WebApi.Dtos;
-using AutoMapper;
+//using AutoMapper;
 using System.IdentityModel.Tokens.Jwt;
 //using WebApi.Helpers;
 using Microsoft.Extensions.Options;

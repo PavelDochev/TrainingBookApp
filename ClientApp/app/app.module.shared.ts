@@ -8,7 +8,6 @@ import { AppComponent } from './components/app/app.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
-import { AuthService } from "./auth/auth.service";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MaterialModule,MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule } from '@angular/material';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -55,7 +54,6 @@ import { HomeService } from "./services/home/home.service";
         ])
     ],
     providers:[
-        AuthService,
         AuthHttp,
         HomeService],
     exports:[TranslateModule]

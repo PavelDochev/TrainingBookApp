@@ -7,14 +7,14 @@
     <!-- This fills the remaining space of the current row -->
     <span class="fill-remaining-space"></span>
     <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-        <div *ngIf="auth.isAuthenticated()">
+        <div ><!-- *ngIf="auth.isAuthenticated()" -->
             <button md-button routerLink="/home">{{'toolbar.btn-home' | translate}}</button>
             <button md-button routerLink="/counter">{{'toolbar.btn-rating' | translate}}</button>
             <button md-button routerLink="/fetch-data">{{'toolbar.btn-users' | translate}}</button>
-            <button md-button (click)="auth.logout()">{{'toolbar.log-out' | translate}}</button>
+            <button md-button >{{'toolbar.log-out' | translate}}</button>
         </div>
-        <div *ngIf="!auth.isAuthenticated()">
-            <button md-button (click)="auth.login()" >{{'toolbar.log-in' | translate}}</button>
+        <div ><!-- *ngIf="!auth.isAuthenticated()" -->
+            <button md-button  >{{'toolbar.log-in' | translate}}</button>
         </div>
     </div>
     <div class="language-btn">
@@ -30,14 +30,14 @@
 
 </md-toolbar>
 <md-menu x-position="before" #menu="mdMenu">
-    <div *ngIf="auth.isAuthenticated()">
+    <div ><!-- *ngIf="auth.isAuthenticated()" -->
         <button class="menuBtn" fxLayoutAlign="center" md-button routerLink="/home">{{'toolbar.btn-home' | translate}}</button>
         <button class="menuBtn" fxLayoutAlign="center" md-button routerLink="/counter">{{'toolbar.btn-rating' | translate}}</button>
         <button class="menuBtn" fxLayoutAlign="center" md-button routerLink="/fetch-data">{{'toolbar.btn-users' | translate}}</button>
-        <button class="menuBtn" fxLayoutAlign="center" md-button (click)="auth.logout()">{{'toolbar.log-out' | translate}}</button>
+        <button class="menuBtn" fxLayoutAlign="center" md-button >{{'toolbar.log-out' | translate}}</button>
     </div>
-    <div *ngIf="!auth.isAuthenticated()">
-        <button class="menuBtn" fxLayoutAlign="center" md-button (click)="auth.login()">{{'toolbar.log-in' | translate}}</button>
+     <div ><!--*ngIf="!auth.isAuthenticated()" -->
+        <button class="menuBtn" fxLayoutAlign="center" md-button >{{'toolbar.log-in' | translate}}</button>
     </div>
 </md-menu>
 

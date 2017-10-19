@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { AuthService } from "../../auth/auth.service";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
@@ -9,10 +8,9 @@ import { TranslateService } from "@ngx-translate/core";
     encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-    constructor(private auth: AuthService,
-                private translate: TranslateService) {
+    constructor(private translate: TranslateService) {
     // Check for authentication and handle if hash present
-    this.auth.handleAuthentication();
+    // this.auth.handleAuthentication();
     //set default language
     translate.setDefaultLang('bg');
     translate.use('bg');
