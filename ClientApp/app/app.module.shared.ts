@@ -16,6 +16,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { HttpLoaderFactory } from "./app.module.browser";
+import { AuthHttp } from "../shared/auth.http";
+import { HomeService } from "./services/home/home.service";
 @NgModule({
     declarations: [
         AppComponent,
@@ -52,7 +54,10 @@ import { HttpLoaderFactory } from "./app.module.browser";
             { path: '**', redirectTo: 'home' }
         ])
     ],
-    providers:[AuthService],
+    providers:[
+        AuthService,
+        AuthHttp,
+        HomeService],
     exports:[TranslateModule]
     
 })
