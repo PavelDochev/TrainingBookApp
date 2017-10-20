@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using MySql.Data.MySqlClient;
 
 namespace TrainingBookApp.Models
 {
@@ -15,17 +16,25 @@ namespace TrainingBookApp.Models
         public virtual DbSet<UserGroup> UserGroup { get; set; }
 
         public TrainingBookAppContext(DbContextOptions<TrainingBookAppContext> options)
-            :base(options)
+            : base(options)
         { }
-
-    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //    {
-    //        if (!optionsBuilder.IsConfigured)
-    //        {
-    //        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-    //        //                optionsBuilder.UseMySql("server=localhost;port=3306;user=pdochev;password=P@rola111;database=trainingbookapp");
-    //        }
-    //    }
+        //public string ConnectionString { get; set; }
+        //public TrainingBookAppContext(string connString)
+        //{
+        //    this.ConnectionString = connString;
+        //}
+        //private MySqlConnection GetConnection()
+        //{
+        //    return new MySqlConnection(ConnectionString);
+        //}
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //    {
+        //        if (!optionsBuilder.IsConfigured)
+        //        {
+        //        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+        //        //                optionsBuilder.UseMySql("server=localhost;port=3306;user=pdochev;password=P@rola111;database=trainingbookapp");
+        //        }
+        //    }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

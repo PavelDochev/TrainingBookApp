@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TrainingBookApp.Models;
 using Microsoft.EntityFrameworkCore;
+//using MySQL.Data.EntityFrameworkCore.Extensions;
 
 namespace TrainingBookApp
 {
@@ -26,7 +27,9 @@ namespace TrainingBookApp
         {
             services.AddDbContext<TrainingBookAppContext>(options =>
                                                           options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
-
+            //services.Add(new ServiceDescriptor(typeof(TrainingBookAppContext), new TrainingBookAppContext(Configuration.GetConnectionString("DefaultConnection"))));
+            //MySqlConnection mysqlConn = new MySqlConnection("server=127.0.0.1;uid=pankaj;port=3306;pwd=master;database=patholabs;");
+            //mysqlConn.Open();
             services.AddMvc();
         }
 

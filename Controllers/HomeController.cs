@@ -8,6 +8,7 @@ using TrainingBookApp.Models;
 
 namespace TrainingBookApp.Controllers
 {
+    
     public class HomeController : Controller
     {
         private TrainingBookAppContext _context;
@@ -17,13 +18,14 @@ namespace TrainingBookApp.Controllers
             _context = context;
         }
 
-        public void Test()
+        [Route("api/[controller]/[action]")]
+        [HttpGet("[action]")]
+        public List<TrainingType> Test()
         {
             //if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             //    return null;
 
-            var user = _context.TrainingType.ToList();
-
+            return _context.TrainingType.ToList();
 
             // check if username exists
             //if (user == null)

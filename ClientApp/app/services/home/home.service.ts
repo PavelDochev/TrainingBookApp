@@ -10,8 +10,8 @@ export class HomeService {
     }
 
     GetWorkingTest() {
-        return this.http.get(this.baseUrl + 'api/SampleData/WeatherForecasts').map((result:any) => {
-            let test = result.json();
+        return this.http.get(this.baseUrl + 'api/Home/Test').map((result:any) => {
+            let test = result.json() as TrainingType[];
             console.log(test);
         }, (error:any) => console.error(error));
         // return this.http.get('api/SampleData/WeatherForecasts', )
@@ -24,4 +24,19 @@ export class HomeService {
         //         return t;
         //     });
     }
+}
+interface TrainingType{
+    TrainingTypeID:number;
+    Name:string;
+}
+interface User{
+    UserId :number;
+    FirstName :string;
+    LastName :string;
+    Email :string;
+    Password :string;
+    SportTypeId :number;
+    ClubName :string;
+    Description :string;
+    PicturePath :string;
 }
